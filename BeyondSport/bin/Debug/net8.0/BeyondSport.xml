@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BeyondSport</name>
+    </assembly>
+    <members>
+        <member name="T:beyondsports.controllers.PlayerController">
+            <summary>
+            Player API
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.PlayerController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController})">
+            <summary>
+            Player API
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.PlayerController.Get(System.Int32)">
+            <summary>
+            Get a specific player.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.PlayerController.Post(beyondsports.models.Player)">
+            <summary>
+            Save a new player.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.PlayerController.Put(System.Int32,beyondsports.models.Player)">
+            <summary>
+            Update a specific player.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.PlayerController.Delete(System.Int32)">
+            <summary>
+            Delete a specific player.
+            </summary>
+        </member>
+        <member name="T:beyondsports.controllers.TeamController">
+            <summary>
+            Team API
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController})">
+            <summary>
+            Team API
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.TeamController.Get(System.String)">
+            <summary>
+            Get a specific team.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.TeamController.Post(beyondsports.models.Team)">
+            <summary>
+            Save a new team.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.TeamController.Put(beyondsports.models.Team)">
+            <summary>
+            Update a specific team.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.TeamController.Delete(System.String)">
+            <summary>
+            Delete a specific team.
+            </summary>
+        </member>
+    </members>
+</doc>
