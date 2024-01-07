@@ -18,15 +18,15 @@
             <summary>
             Get a specific player.
             </summary>
-            <param name="id">The Player id</param>
+            <param name="id">The player id</param>
             <returns>The player</returns>
-            <response code="404">If the player doesn't exist</response>        
+            <response code="404">Player not found</response>        
         </member>
         <member name="M:beyondsports.controllers.PlayerController.Post(beyondsports.models.Player)">
             <summary>
             Save a new player.
             </summary>
-            <param name="player">The Player object</param>
+            <param name="player">The player object</param>
             <returns>The inserted player</returns>
             <response code="400">If the player object is not valid</response> 
             <response code="500">If an unexpected error occurred</response>   
@@ -46,7 +46,7 @@
             </summary>
             <param name="id">The Player id</param>
             <returns>The deleted player</returns>
-            <response code="404">If the player doesn't exist</response>      
+            <response code="404">Player not found</response>      
         </member>
         <member name="T:beyondsports.controllers.TeamController">
             <summary>
@@ -70,9 +70,9 @@
             <summary>
             Get all players of a specific team.
             </summary>
-            <param name="id">The player of the team</param>
+            <param name="id">The team id</param>
             <returns>The team</returns>
-            <response code="404">"Team not Found</response> 
+            <response code="404">Team not Found</response> 
         </member>
         <member name="M:beyondsports.controllers.TeamController.Post(beyondsports.models.Team)">
             <summary>
@@ -81,6 +81,7 @@
             <param name="team">The Team object</param>
             <returns>The inserted team</returns>
             <response code="400">If the team object is not valid</response> 
+            <response code="404">Team not found</response>  
             <response code="500">If an unexpected error occurred</response> 
         </member>
         <member name="M:beyondsports.controllers.TeamController.Put(beyondsports.models.Team)">
@@ -96,9 +97,9 @@
             <summary>
             Delete a specific team.
             </summary>
-            <param name="id">The Team object</param>
+            <param name="id">The Team id</param>
             <returns>The deleted team</returns>
-            <response code="404">If the team doesn't exist</response>    
+            <response code="404">Team not found</response>    
         </member>
     </members>
 </doc>

@@ -37,9 +37,9 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
      /// <summary>
     /// Get all players of a specific team.
     /// </summary>
-    /// <param name="id">The player of the team</param>
+    /// <param name="id">The team id</param>
     /// <returns>The team</returns>
-    /// <response code="404">"Team not Found</response> 
+    /// <response code="404">Team not Found</response> 
     [HttpGet("{id}/players")]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -48,11 +48,12 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
         _logger.LogInformation("Getting player for team: {}",  id );
         var team = _dbContext.Team.Find(id);
         if (team == null) {
-            return NotFound("Team not Found");
+            return NotFound("Team not found");
         }
         return Ok(_dbContext.Player.Where(player => player.team_id == team.id).ToList());
         // delete an item
     }
+    
 
     /// <summary>
     /// Save a new team.
@@ -60,15 +61,23 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     /// <param name="team">The Team object</param>
     /// <returns>The inserted team</returns>
     /// <response code="400">If the team object is not valid</response> 
+    /// <response code="404">Team not found</response>  
     /// <response code="500">If an unexpected error occurred</response> 
     [HttpPost]
     [Consumes("application/json")]
     [Produces("application/json")]
     [ProducesResponseType<Team>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Post([FromBody] Team team)
     {
+
+        var teamFromDb = _dbContext.Team.Find(team.id);
+        if (teamFromDb == null) {
+            return NotFound("Team not found");
+        }
+
         try
         {
             _dbContext.Add(team);
@@ -99,10 +108,16 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     [Produces("application/json")]
     [ProducesResponseType<Team>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpPut]
     public IActionResult Put([FromBody] Team team)
     {
+        var teamFromDb = _dbContext.Team.Find(team.id);
+        if (teamFromDb == null) {
+            return NotFound("Team not found");
+        }
+        
          try
         {
             _dbContext.Update(team);
@@ -119,9 +134,9 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     /// <summary>
     /// Delete a specific team.
     /// </summary>
-    /// <param name="id">The Team object</param>
+    /// <param name="id">The Team id</param>
     /// <returns>The deleted team</returns>
-    /// <response code="404">If the team doesn't exist</response>    
+    /// <response code="404">Team not found</response>    
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult Delete(int id)
@@ -129,8 +144,9 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
         _logger.LogInformation("Deleting team with id {}", id);
         var teamFromDb =  _dbContext.Team.Find(id);
         if (teamFromDb == null) {
-            return NotFound();
+            return NotFound("Team not found");
         }
+
         _dbContext.Team.Remove(teamFromDb);
         _dbContext.SaveChanges();
         return Ok(teamFromDb);
