@@ -30,11 +30,13 @@ builder.Services.AddDbContext<BeyondSportContext>(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddMvcCore().AddDataAnnotations();
+builder.Configuration.AddEnvironmentVariables();
+
 
 
 var app = builder.Build();
 
-app.UseSwagger();
+    app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
