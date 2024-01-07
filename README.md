@@ -38,8 +38,9 @@ Before getting started, ensure you have the following prerequisites installed on
 3. **Build and Run the Project:**
 
    ```bash
+   dotnet clean
    dotnet build
-   dotnet run — launch-profile local
+   dotnet run
 
   The application should now be running at http://localhost:5000
 

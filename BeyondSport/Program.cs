@@ -50,7 +50,7 @@ var app = builder.Build();
     if (app.Environment.IsDevelopment()) {
         Console.WriteLine("Seeding for local development");
         using var scope = app.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+        ApplicationContext context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
         context.Team.AddRange(
             new Team { id = 1, name = "SSC Napoli", country = "Italy" },
             new Team { id = 2, name = "FC Barcelona",  country = "Spain"}
