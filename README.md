@@ -9,6 +9,20 @@ Before getting started, ensure you have the following prerequisites installed on
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Docker](https://www.docker.com/get-started)
 
+  ## Running with Docker Compose
+
+1. **Navigate to Project Directory:**
+
+   ```bash
+   cd BeyondSport
+
+2. **Run Docker Compose command**
+
+   ```bash
+   docker compose up
+
+  This will start a mysql container for storage mapped to host port ```3306 ``` and the .NET application mapped to host port  ```8080 ```
+
 ## Running the Project Locally
 
 1. **Clone the Repository:**
@@ -28,21 +42,6 @@ Before getting started, ensure you have the following prerequisites installed on
    dotnet run
 
   The application should now be running at http://localhost:8080.
-
-
-## Running with Docker Compose
-
-1. **Navigate to Project Directory:**
-
-   ```bash
-   cd BeyondSport
-
-2. **Run Docker Compose command**
-
-   ```bash
-   docker compose up
-
-  This will start a mysql container for storage and the .NET application mapped to host port  ```8080 ```
 
 
 
