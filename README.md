@@ -43,6 +43,11 @@ Before getting started, ensure you have the following prerequisites installed on
 
   The application should now be running at http://localhost:5000
 
+3. **Call the REST API:**
+
+   ```bash
+   curl -X 'GET' \'http://localhost:5000/Player/1' \ -H 'accept: application/json'
+
 
 
 
