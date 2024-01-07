@@ -30,18 +30,18 @@ Before getting started, ensure you have the following prerequisites installed on
    ```bash
    git clone https://github.com/obladioblada/BeyondSport.git
 
-2. **Navigate to Project Directory:**
+2. **Navigate to .NET project Directory:**
 
    ```bash
-   cd BeyondSport
+   cd BeyondSport/BeyondSport
 
 3. **Build and Run the Project:**
 
    ```bash
    dotnet build
-   dotnet run
+   dotnet run — launch-profile local
 
-  The application should now be running at http://localhost:8080.
+  The application should now be running at http://localhost:5000
 
 
 
