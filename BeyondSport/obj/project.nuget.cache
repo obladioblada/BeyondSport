@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wdqUC1vFEcCR8Nj5gPGOBqaOaSYmQV+bPUz15gISkK+QCmPBsA7iDd4DBB0JWQe0o7FN6B0BufekSvVkXOD2tw==",
+  "dgSpecHash": "s1KkXgZ33986wL7eTwzLx/doXFwDLF17wYOPaUDDGcOgopib+cpDKCmwGbpp3WHZagHs8HUUbbszc5rnUdSl/A==",
   "success": true,
   "projectFilePath": "/Users/gp/Desktop/BeyondSport/BeyondSport/BeyondSport.csproj",
   "expectedPackageFiles": [
@@ -16,6 +16,7 @@
     "/Users/gp/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.0/microsoft.entityframeworkcore.abstractions.8.0.0.nupkg.sha512",
     "/Users/gp/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.0/microsoft.entityframeworkcore.analyzers.8.0.0.nupkg.sha512",
     "/Users/gp/.nuget/packages/microsoft.entityframeworkcore.design/8.0.0/microsoft.entityframeworkcore.design.8.0.0.nupkg.sha512",
+    "/Users/gp/.nuget/packages/microsoft.entityframeworkcore.inmemory/8.0.0/microsoft.entityframeworkcore.inmemory.8.0.0.nupkg.sha512",
     "/Users/gp/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.0/microsoft.entityframeworkcore.relational.8.0.0.nupkg.sha512",
     "/Users/gp/.nuget/packages/microsoft.entityframeworkcore.tools/8.0.0/microsoft.entityframeworkcore.tools.8.0.0.nupkg.sha512",
     "/Users/gp/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

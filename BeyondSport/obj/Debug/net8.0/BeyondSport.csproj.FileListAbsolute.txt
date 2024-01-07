@@ -17,6 +17,7 @@
 /Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.dll
 /Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
 /Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.Extensions.DependencyModel.dll
 /Users/gp/Desktop/BeyondSport/BeyondSport/bin/Debug/net8.0/Microsoft.OpenApi.dll

@@ -17,5 +17,5 @@ RUN dotnet publish "BeyondSport.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-RUN echo "Starting environment"
+RUN echo "Starting application..."
 ENTRYPOINT ["dotnet", "BeyondSport.dll"]

@@ -3,7 +3,7 @@ version: '3.4'
 services:
   beyonds-sports-api:
     build:
-      context: .
+      context: ./BeyondSport
       dockerfile: Dockerfile
     networks:
       - beyond-sports-network

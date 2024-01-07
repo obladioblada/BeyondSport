@@ -9,7 +9,7 @@
             Player API
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.PlayerController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController},beyondsports.dbContext.BeyondSportContext)">
+        <member name="M:beyondsports.controllers.PlayerController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController},beyondsports.dbContext.ApplicationContext)">
             <summary>
             Player API
             </summary>
@@ -53,7 +53,7 @@
             Team API
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.TeamController},beyondsports.dbContext.BeyondSportContext)">
+        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.TeamController},beyondsports.dbContext.ApplicationContext)">
             <summary>
             Team API
             </summary>

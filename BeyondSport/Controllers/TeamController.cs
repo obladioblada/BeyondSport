@@ -11,10 +11,10 @@ namespace beyondsports.controllers {
 /// </summary>
 [ApiController]
 [Route("[controller]")]
-public class TeamController(ILogger<TeamController> logger, BeyondSportContext context) : ControllerBase
+public class TeamController(ILogger<TeamController> logger, ApplicationContext context) : ControllerBase
 {
     private readonly ILogger<TeamController> _logger = logger;
-    private readonly BeyondSportContext _dbContext  = context;
+    private readonly ApplicationContext _dbContext  = context;
 
 
     /// <summary>
