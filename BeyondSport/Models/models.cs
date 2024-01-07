@@ -18,8 +18,8 @@ namespace beyondsports.models {
         [Required(ErrorMessage = "Player name is required!", AllowEmptyStrings=false)]
         public string name { get; set; }
         [Required(ErrorMessage = "Player age is required!", AllowEmptyStrings=false)]
-        public int age { get; set; }
+        public int? age { get; set; }
         [Required(ErrorMessage = "Player team id is required!")]
-        public int team_id { get; set; }
+        public int? team_id { get; set; }
     };
 }

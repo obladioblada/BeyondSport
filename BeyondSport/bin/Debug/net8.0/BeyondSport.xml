@@ -18,56 +18,87 @@
             <summary>
             Get a specific player.
             </summary>
+            <param name="id">The Player id</param>
+            <returns>The player</returns>
+            <response code="404">If the player doesn't exist</response>        
         </member>
         <member name="M:beyondsports.controllers.PlayerController.Post(beyondsports.models.Player)">
             <summary>
             Save a new player.
             </summary>
+            <param name="player">The Player object</param>
+            <returns>The inserted player</returns>
+            <response code="400">If the player object is not valid</response> 
+            <response code="500">If an unexpected error occurred</response>   
         </member>
         <member name="M:beyondsports.controllers.PlayerController.Put(beyondsports.models.Player)">
             <summary>
             Update a specific player.
             </summary>
+            <param name="player">The Player object</param>
+            <returns>The inserted player</returns>
+            <response code="400">If the player object is not valid</response> 
+            <response code="500">If an unexpected error occurred</response>   
         </member>
         <member name="M:beyondsports.controllers.PlayerController.Delete(System.Int32)">
             <summary>
             Delete a specific player.
             </summary>
+            <param name="id">The Player id</param>
+            <returns>The deleted player</returns>
+            <response code="404">If the player doesn't exist</response>      
         </member>
         <member name="T:beyondsports.controllers.TeamController">
             <summary>
             Team API
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.TeamController})">
+        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.TeamController},beyondsports.dbContext.BeyondSportContext)">
             <summary>
             Team API
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.TeamController.Get(System.String)">
+        <member name="M:beyondsports.controllers.TeamController.Get(System.Int32)">
             <summary>
             Get a specific team.
             </summary>
+            <param name="id">The Team id</param>
+            <returns>The team</returns>
+            <response code="404">"Team not Found</response>  
         </member>
-        <member name="M:beyondsports.controllers.TeamController.GetTeamPlayers(System.String)">
+        <member name="M:beyondsports.controllers.TeamController.GetTeamPlayers(System.Int32)">
             <summary>
             Get all players of a specific team.
             </summary>
+            <param name="id">The player of the team</param>
+            <returns>The team</returns>
+            <response code="404">"Team not Found</response> 
         </member>
         <member name="M:beyondsports.controllers.TeamController.Post(beyondsports.models.Team)">
             <summary>
             Save a new team.
             </summary>
+            <param name="team">The Team object</param>
+            <returns>The inserted team</returns>
+            <response code="400">If the team object is not valid</response> 
+            <response code="500">If an unexpected error occurred</response> 
         </member>
         <member name="M:beyondsports.controllers.TeamController.Put(beyondsports.models.Team)">
             <summary>
             Update a specific team.
             </summary>
+            <param name="team">The Team object</param>
+            <returns>The inserted team</returns>
+            <response code="400">If the team object is not valid</response> 
+            <response code="500">If an unexpected error occurred</response> 
         </member>
-        <member name="M:beyondsports.controllers.TeamController.Delete(System.String)">
+        <member name="M:beyondsports.controllers.TeamController.Delete(System.Int32)">
             <summary>
             Delete a specific team.
             </summary>
+            <param name="id">The Team object</param>
+            <returns>The deleted team</returns>
+            <response code="404">If the team doesn't exist</response>    
         </member>
     </members>
 </doc>

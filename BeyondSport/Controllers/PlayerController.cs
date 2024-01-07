@@ -10,7 +10,7 @@ namespace beyondsports.controllers {
 /// </summary>
 [ApiController]
 [Route("[controller]")]
-public class PlayerController(ILogger<PlayerController> logger, BeyondSportContext context) : Controller
+public class PlayerController(ILogger<PlayerController> logger, BeyondSportContext context) : ControllerBase
 {
     private readonly ILogger<PlayerController> _logger = logger;
     private readonly BeyondSportContext _dbContext  = context;
@@ -18,6 +18,9 @@ public class PlayerController(ILogger<PlayerController> logger, BeyondSportConte
     /// <summary>
     /// Get a specific player.
     /// </summary>
+    /// <param name="id">The Player id</param>
+    /// <returns>The player</returns>
+    /// <response code="404">If the player doesn't exist</response>        
     [HttpGet("{id}")]
     [Produces("application/json")]
     [ProducesResponseType<Player>(StatusCodes.Status200OK)]
@@ -25,18 +28,23 @@ public class PlayerController(ILogger<PlayerController> logger, BeyondSportConte
     public IActionResult Get(int id)
     {
         _logger.LogInformation("Trying to find player with id : " + id);
-         Player player = _dbContext.Player.Find(id);
+         var player = _dbContext.Player.Find(id);
          return player == null ? NotFound() : Ok(player);
     }
 
     /// <summary>
     /// Save a new player.
     /// </summary>
+    /// <param name="player">The Player object</param>
+    /// <returns>The inserted player</returns>
+    /// <response code="400">If the player object is not valid</response> 
+    /// <response code="500">If an unexpected error occurred</response>   
     [HttpPost]
     [Consumes("application/json")]
     [Produces("application/json")]
     [ProducesResponseType<Player>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Post([FromBody] Player player)
     {
 
@@ -53,7 +61,7 @@ public class PlayerController(ILogger<PlayerController> logger, BeyondSportConte
         }
         catch (Exception e) {
             _logger.LogError(e, "Error occured while adding new player!");
-            return BadRequest();
+            return StatusCode(500, "Internal Server Error");
         }
        
         
@@ -62,6 +70,10 @@ public class PlayerController(ILogger<PlayerController> logger, BeyondSportConte
     /// <summary>
     /// Update a specific player.
     /// </summary>
+    /// <param name="player">The Player object</param>
+    /// <returns>The inserted player</returns>
+    /// <response code="400">If the player object is not valid</response> 
+    /// <response code="500">If an unexpected error occurred</response>   
     [HttpPut]
     [Consumes("application/json")]
     [Produces("application/json")]
@@ -80,7 +92,7 @@ public class PlayerController(ILogger<PlayerController> logger, BeyondSportConte
         catch (Exception e)
         {
             _logger.LogError(e, "Error occured while saving player!");
-            return StatusCode(500);
+            return StatusCode(500, "Internal Server Error");
         }
        
     }
@@ -88,11 +100,15 @@ public class PlayerController(ILogger<PlayerController> logger, BeyondSportConte
     /// <summary>
     /// Delete a specific player.
     /// </summary>
+    /// <param name="id">The Player id</param>
+    /// <returns>The deleted player</returns>
+    /// <response code="404">If the player doesn't exist</response>      
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult Delete(int id)
     {
-        var playerFromDb =  _dbContext.Player.FirstOrDefault(d => d.id == id);
+        _logger.LogInformation("Deleting team with id {}", id);
+        var playerFromDb =  _dbContext.Player.Find(id);
         if (playerFromDb == null) {
             return NotFound();
         }

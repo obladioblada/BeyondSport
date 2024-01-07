@@ -21,8 +21,10 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddScoped<DbContext, BeyondSportContext>();
 
 builder.Services.AddDbContext<BeyondSportContext>(options => 
- options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), 
-    new MySqlServerVersion(new Version(8, 0, 22))
+ options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"), 
+        new MySqlServerVersion(new Version(8, 0, 22)), 
+        options => options.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null)
     )
 );
 
