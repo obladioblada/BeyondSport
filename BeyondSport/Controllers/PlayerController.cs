@@ -1,5 +1,7 @@
+using beyondsports.dbContext;
 using beyondsports.models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace beyondsports.controllers {
@@ -8,49 +10,95 @@ namespace beyondsports.controllers {
 /// </summary>
 [ApiController]
 [Route("[controller]")]
-public class PlayerController(ILogger<PlayerController> logger) : ControllerBase
+public class PlayerController(ILogger<PlayerController> logger, BeyondSportContext context) : Controller
 {
     private readonly ILogger<PlayerController> _logger = logger;
+    private readonly BeyondSportContext _dbContext  = context;
 
     /// <summary>
     /// Get a specific player.
     /// </summary>
     [HttpGet("{id}")]
     [Produces("application/json")]
-    public Player Get(int id)
+    [ProducesResponseType<Player>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult Get(int id)
     {
-        // return specific item
-        var player =  new Player(id, "totti", 40);
-        return player;
+        _logger.LogInformation("Trying to find player with id : " + id);
+         Player player = _dbContext.Player.Find(id);
+         return player == null ? NotFound() : Ok(player);
     }
 
     /// <summary>
     /// Save a new player.
     /// </summary>
     [HttpPost]
-    public void Post([FromBody] Player value)
+    [Consumes("application/json")]
+    [Produces("application/json")]
+    [ProducesResponseType<Player>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public IActionResult Post([FromBody] Player player)
     {
-        // add new item
 
+        try
+        {
+            _dbContext.Add(player);
+            _dbContext.SaveChanges();
+            return Ok(player);
+        }
+        catch (DbUpdateException e)
+        {
+            _logger.LogError(e, "Error occured while adding new player!");
+            return BadRequest(e.Message);
+        }
+        catch (Exception e) {
+            _logger.LogError(e, "Error occured while adding new player!");
+            return BadRequest();
+        }
+       
+        
     }
 
     /// <summary>
     /// Update a specific player.
     /// </summary>
-    [HttpPut("{id}")]
+    [HttpPut]
     [Consumes("application/json")]
-    public void Put(int id, [FromBody] Player value)
+    [Produces("application/json")]
+    [ProducesResponseType<Player>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public IActionResult Put([FromBody] Player player)
     {
-        // update an item
+    
+        try
+        {
+            _dbContext.Update(player);
+            _dbContext.SaveChanges();
+            return Ok(player);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "Error occured while saving player!");
+            return StatusCode(500);
+        }
+       
     }
 
     /// <summary>
     /// Delete a specific player.
     /// </summary>
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public IActionResult Delete(int id)
     {
-        // delete an item
+        var playerFromDb =  _dbContext.Player.FirstOrDefault(d => d.id == id);
+        if (playerFromDb == null) {
+            return NotFound();
+        }
+        _dbContext.Player.Remove(playerFromDb);
+        _dbContext.SaveChanges();
+        return Ok();
     }
 }
 

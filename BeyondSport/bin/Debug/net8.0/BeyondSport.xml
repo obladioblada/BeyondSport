@@ -9,7 +9,7 @@
             Player API
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.PlayerController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController})">
+        <member name="M:beyondsports.controllers.PlayerController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController},beyondsports.dbContext.BeyondSportContext)">
             <summary>
             Player API
             </summary>
@@ -24,7 +24,7 @@
             Save a new player.
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.PlayerController.Put(System.Int32,beyondsports.models.Player)">
+        <member name="M:beyondsports.controllers.PlayerController.Put(beyondsports.models.Player)">
             <summary>
             Update a specific player.
             </summary>
@@ -39,7 +39,7 @@
             Team API
             </summary>
         </member>
-        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.PlayerController})">
+        <member name="M:beyondsports.controllers.TeamController.#ctor(Microsoft.Extensions.Logging.ILogger{beyondsports.controllers.TeamController})">
             <summary>
             Team API
             </summary>
@@ -47,6 +47,11 @@
         <member name="M:beyondsports.controllers.TeamController.Get(System.String)">
             <summary>
             Get a specific team.
+            </summary>
+        </member>
+        <member name="M:beyondsports.controllers.TeamController.GetTeamPlayers(System.String)">
+            <summary>
+            Get all players of a specific team.
             </summary>
         </member>
         <member name="M:beyondsports.controllers.TeamController.Post(beyondsports.models.Team)">

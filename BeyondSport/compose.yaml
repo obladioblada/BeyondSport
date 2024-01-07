@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  beyonds-sports-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on: 
+      - mysql-db
+    ports:
+      - "8080:8080"
+    restart: always
+    environment: 
+      - DBHOST=mysql-db
+  
+  mysql-db:
+    image: mysql:8.0.22
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldb:/var/lib/mysql
+      - ./sql/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: Root0++
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: beyondSports
+      
+volumes:
+  mysqldb:
