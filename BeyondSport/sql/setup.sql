@@ -15,4 +15,5 @@ CREATE TABLE Player (
 INSERT INTO Team  (id, name, country) VALUES (1, 'Rome', 'Italy');
 INSERT INTO Team (id, name, country) VALUES (2,'AZ Alkmaar', ' Netherlands');
 INSERT INTO Player (name, age, team_id) VALUES ('Francesco Totti', 40, 1);
+INSERT INTO Player (name, age, team_id) VALUES ('Daniele De Rossi', 37, 1);
 INSERT INTO Player (name, age, team_id) VALUES ('Vangelis Pavlidis', 25, 2);

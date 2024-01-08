@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeyondSport")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa3b427e4d4202167899b92db446fd9128abe2e7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec7cacc98ce4bac77663a93ac4ad05316bf3599c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeyondSport")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeyondSport")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
