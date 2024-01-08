@@ -1,6 +1,7 @@
 # README: Beyond Sports
 
-   This README provides instructions on how to run a .NET 8 project for the assignment. The project includes Swagger documentation accessible at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html) and can also be run using Docker Compose, with the   ```compose.yaml``` file located under the root directory.
+   This README provides instructions on how to run a .NET 8 project for the assignment. 
+   The project includes [Swagger](https://swagger.io/) documentation and can be run using Docker Compose, with the  ```compose.yaml``` file located under the root directory.
 
    For the test sake I decided to use InMemoryDB in case docker is not installed on the host machine. Follow "Running the Project Locally" section in that case.
    If the application is running with docker, a MySql database container is fired up along with the app.
@@ -45,8 +46,10 @@
 
 3. **Call the REST API:**
 
+   Check the Swagger documentation accessible at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html) 
+
    ```bash
-   curl -X 'GET' \'http://localhost:5000/Player/1' \ -H 'accept: application/json'
+   curl -X 'GET' \'http://localhost:8080/Player/1' \ -H 'accept: application/json'
    ```
 
 ## Running the Project Locally
