@@ -1,6 +1,6 @@
 # README: Beyond Sports .NET 8 Assignment
 
-This README provides instructions on how to run a .NET 8 project for the assignment. The project includes Swagger documentation accessible at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html) and can also be run using Docker Compose, with the   ```compose.yml ``` file located under the root directory.
+This README provides instructions on how to run a .NET 8 project for the assignment. The project includes Swagger documentation accessible at [http://localhost:8080/swagger/index.html](http://localhost:8080/swagger/index.html) and can also be run using Docker Compose, with the   ```compose.yaml ``` file located under the root directory.
 
 ## Prerequisites
 
@@ -9,7 +9,7 @@ Before getting started, ensure you have the following prerequisites installed on
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Docker](https://www.docker.com/get-started)
 
-  ## Running with Docker Compose
+## Running with Docker Compose
 
 1. **Navigate to Project Directory:**
 
@@ -21,7 +21,18 @@ Before getting started, ensure you have the following prerequisites installed on
    ```bash
    docker compose up
 
-  This will start a mysql container for storage mapped to host port ```3306 ``` and the .NET application mapped to host port  ```8080 ```
+  This will start a mysql container for storage mapped to host port ```3306``` and the .NET application mapped to host port  ```8080```
+
+  If needed, ports can be changed in ```compose.yaml```
+  
+    ```bash
+   ports:
+      - "<host_port>:3306"
+
+ 3 **Call the REST API:**
+
+   ```bash
+   curl -X 'GET' \'http://localhost:5000/Player/1' \ -H 'accept: application/json'
 
 ## Running the Project Locally
 
@@ -48,7 +59,5 @@ Before getting started, ensure you have the following prerequisites installed on
 
    ```bash
    curl -X 'GET' \'http://localhost:5000/Player/1' \ -H 'accept: application/json'
-
-
 
 

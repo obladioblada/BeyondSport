@@ -1,5 +1,3 @@
-// SampleControllerIntegrationTest.cs
-using System.Text;
 using beyondsports.models;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;

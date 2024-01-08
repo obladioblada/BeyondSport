@@ -46,9 +46,9 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Post([FromBody] Player player)
+    public IActionResult Post([FromBody] Player player)
     {
-        var playerFromDb = _dbContext.Player.Find(player.id);
+        var playerFromDb =  _dbContext.Player.Find(player.id);
         if (playerFromDb == null) {
             return NotFound("Player not found");
         }
