@@ -12,6 +12,7 @@ namespace beyondsports.models {
     };
 
     public class Player {
+
         [Key] 
         public int id { get; set; }
 

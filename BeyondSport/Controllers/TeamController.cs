@@ -53,58 +53,60 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
         return Ok(_dbContext.Player.Where(player => player.team_id == team.id).ToList());
         // delete an item
     }
-    
 
-    /// <summary>
-    /// Save a new team.
-    /// </summary>
-    /// <param name="team">The Team object</param>
-    /// <returns>The inserted team</returns>
-    /// <response code="400">If the team object is not valid</response> 
-    /// <response code="404">Team not found</response>  
-    /// <response code="500">If an unexpected error occurred</response> 
-    [HttpPost]
-    [Consumes("application/json")]
-    [Produces("application/json")]
-    [ProducesResponseType<Team>(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public IActionResult Post([FromBody] Team team)
-    {
 
-        var teamFromDb = _dbContext.Team.Find(team.id);
-        if (teamFromDb == null) {
-            return NotFound("Team not found");
-        }
-
-        try
+        /// <summary>
+        /// Save a new team.
+        /// </summary>
+        /// <param name="team">The Team object</param>
+        /// <returns>The inserted team</returns>
+        /// <response code="400">If the team object is not valid</response> 
+        /// <response code="404">Team not found</response>  
+        /// <response code="500">If an unexpected error occurred</response> 
+        [HttpPost]
+        [Consumes("application/json")]
+        [Produces("application/json")]
+        [ProducesResponseType<Team>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Post([FromBody] Team team)
         {
-            _dbContext.Add(team);
-            _dbContext.SaveChanges();
-            return Ok(team);
-        }
-        catch (DbUpdateException e)
-        {
-            _logger.LogError(e, "Error occured while adding new team!");
-            return BadRequest(e.Message);
-        }
-        catch (Exception e) {
-            _logger.LogError(e, "Error occured while adding new team!");
-            return StatusCode(500, "Internal Server Error");
-        }
-       
 
-    }
+            var teamFromDb = _dbContext.Team.Find(team.id);
+            if (teamFromDb == null)
+            {
+                return NotFound("Team not found");
+            }
 
-    /// <summary>
-    /// Update a specific team.
-    /// </summary>
-    /// <param name="team">The Team object</param>
-    /// <returns>The inserted team</returns>
-    /// <response code="400">If the team object is not valid</response> 
-    /// <response code="500">If an unexpected error occurred</response> 
-    [Consumes("application/json")]
+            try
+            {
+                _dbContext.Add(team);
+                _dbContext.SaveChanges();
+                return Ok(team);
+            }
+            catch (DbUpdateException e)
+            {
+                _logger.LogError(e, "Error occured while adding new team!");
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Error occured while adding new team!");
+                return StatusCode(500, "Internal Server Error");
+            }
+
+
+        }
+
+        /// <summary>
+        /// Update a specific team.
+        /// </summary>
+        /// <param name="team">The Team object</param>
+        /// <returns>The inserted team</returns>
+        /// <response code="400">If the team object is not valid</response> 
+        /// <response code="500">If an unexpected error occurred</response> 
+        [Consumes("application/json")]
     [Produces("application/json")]
     [ProducesResponseType<Team>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

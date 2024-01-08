@@ -57,8 +57,8 @@ var app = builder.Build();
         );
 
         context.Player.AddRange(
-            new Player { id = 1, name = "Diego Armando Maradona",  age = 32, team_id = 1 },
-            new Player  {id = 2,name = "Lionel Messi",age = 33,team_id = 2 }
+            new Player {id = 1, name = "Diego Armando Maradona",  age = 32, team_id = 1 },
+            new Player {id = 2,name = "Lionel Messi",age = 33,team_id = 2 }
         );
 
         context.SaveChanges();
