@@ -3,8 +3,8 @@
    This README provides instructions on how to run a .NET 8 project for the assignment. 
    The project includes [Swagger](https://swagger.io/) documentation and can be run using Docker Compose, with the  ```compose.yaml``` file located under the root directory.
 
-   For the test sake I decided to use InMemoryDB in case docker is not installed on the host machine. Jump to the "Running the Project Locally" section in that case.
-   If the application is running with docker, a MySql database container is fired up along with the app.
+   For the test sake I decided to use InMemoryDB in case docker is not installed on the host machine. Jump to the "Running the Project Locally" section in that case.  
+If the application is running with docker, a MySql database container is fired up along with the app.  
 Both ways, the application is pre-populated with some data.
 
 ## Prerequisites
