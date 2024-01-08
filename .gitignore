@@ -28,6 +28,7 @@ nupkg/
 
 # Build results
 .BeyondSport/bin/
+.BeyondSport/obj/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
