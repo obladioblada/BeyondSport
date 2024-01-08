@@ -16,7 +16,7 @@ Before getting started, ensure you have the following prerequisites installed on
 Download the project 
 
    ```bash
-   git clone https://github.com/obladioblada/BeyondSport.git
+      git clone https://github.com/obladioblada/BeyondSport.git
    ```
 
 
@@ -34,19 +34,19 @@ Download the project
       docker compose up
    ```
 
-  This will start a mysql container for storage mapped to host port ```3306``` and the .NET application mapped to host port  ```8080```
+      This will start a mysql container for storage mapped to host port ```3306``` and the .NET application mapped to host port  ```8080```
 
-  If needed, ports can be changed in ```compose.yaml```
+      If needed, ports can be changed in ```compose.yaml```
   
    ```yaml
-   ports:
-      - "<host_port>:3306"
+      ports:
+         - "<host_port>:3306"
    ```
 
  3 **Call the REST API:**
 
    ```bash
-   curl -X 'GET' \'http://localhost:5000/Player/1' \ -H 'accept: application/json'
+      curl -X 'GET' \'http://localhost:5000/Player/1' \ -H 'accept: application/json'
    ```
 
 ## Running the Project Locally
@@ -54,21 +54,21 @@ Download the project
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/obladioblada/BeyondSport.git
+      git clone https://github.com/obladioblada/BeyondSport.git
    ```
 
 2. **Navigate to .NET app directory:**
 
    ```bash
-   cd BeyondSport/BeyondSport
+      cd BeyondSport/BeyondSport
    ```
 
 3. **Build and Run the Project:**
 
    ```bash
-   dotnet clean
-   dotnet build
-   dotnet run
+      dotnet clean
+      dotnet build
+      dotnet run
    ```
 
   The application should now be running at http://localhost:5000
@@ -79,5 +79,5 @@ Download the project
    You can run the tests with 
 
    ```bash
-   dotnet test
+      dotnet test
     ```
