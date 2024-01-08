@@ -13,7 +13,6 @@
    - [.NET 8 SDK](https://dotnet.microsoft.com/download)
    - [Docker](https://www.docker.com/get-started)
 
-##### Running with Docker Compose
    Download the project 
 
    ```bash
