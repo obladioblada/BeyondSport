@@ -60,10 +60,10 @@
    git clone https://github.com/obladioblada/BeyondSport.git
    ```
 
-2. **Navigate to .NET app directory:**
+2. **Navigate to Project root directory:**
 
    ```bash
-   cd BeyondSport/BeyondSport
+   cd BeyondSport
    ```
 
 3. **Build and Run the Project:**
@@ -71,7 +71,7 @@
    ```bash
    dotnet clean
    dotnet build
-   dotnet run
+   dotnet run --project=./BeyondSport
    ```
 
   The application should now be running at http://localhost:5000
