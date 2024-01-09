@@ -48,16 +48,15 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Post([FromBody] Player player)
     {
-        var playerFromDb =  _dbContext.Player.Find(player.id);
-        if (playerFromDb == null) {
-            return NotFound("Player not found");
+        var playerFromDb = _dbContext.Player.Find(player.id);
+        if (playerFromDb != null) {
+            return BadRequest("A Player with this id already exists" );
         }
-
         try
         {
-            _dbContext.Add(player);
+            var savedEntity =_dbContext.Add(player);
             _dbContext.SaveChanges();
-            return Ok(player);
+            return Ok(savedEntity.Entity);
         }
         catch (Exception e) {
             _logger.LogError(e, "Error occured while adding new player!");
@@ -83,7 +82,10 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public IActionResult Put([FromBody] Player player)
     {
-        var playerFromDb =  _dbContext.Player.Find(player.id);
+        var playerFromDb = _dbContext.Player.AsNoTracking()
+                  .Where(p => p.id.Equals(player.id))
+                  .FirstOrDefault();
+
         if (playerFromDb == null) {
             return NotFound("Player not found");
         }
@@ -113,7 +115,10 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
     public IActionResult Delete(int id)
     {
         _logger.LogInformation("Deleting team with id {}", id);
-        var playerFromDb =  _dbContext.Player.Find(id);
+        var playerFromDb = _dbContext.Player.AsNoTracking()
+                  .Where(p => p.id.Equals(id))
+                  .FirstOrDefault();
+
         if (playerFromDb == null) {
             return NotFound("Player not found");
         }

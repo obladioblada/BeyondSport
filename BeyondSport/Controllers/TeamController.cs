@@ -34,7 +34,7 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
          return team == null ? NotFound("Team not Found") : Ok(team);
     }
 
-     /// <summary>
+    /// <summary>
     /// Get all players of a specific team.
     /// </summary>
     /// <param name="id">The team id</param>
@@ -45,7 +45,7 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult GetTeamPlayers(int id)
     {
-        _logger.LogInformation("Getting player for team: {}",  id );
+        _logger.LogInformation("Getting players for team: {}",  id );
         var team = _dbContext.Team.Find(id);
         if (team == null) {
             return NotFound("Team not found");
@@ -55,35 +55,34 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     }
 
 
-        /// <summary>
-        /// Save a new team.
-        /// </summary>
-        /// <param name="team">The Team object</param>
-        /// <returns>The inserted team</returns>
-        /// <response code="400">If the team object is not valid</response> 
-        /// <response code="404">Team not found</response>  
-        /// <response code="500">If an unexpected error occurred</response> 
-        [HttpPost]
-        [Consumes("application/json")]
-        [Produces("application/json")]
-        [ProducesResponseType<Team>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Post([FromBody] Team team)
-        {
+    /// <summary>
+    /// Save a new team.
+    /// </summary>
+    /// <param name="team">The Team object</param>
+    /// <returns>The inserted team</returns>
+    /// <response code="400">If the team object is not valid</response> 
+    /// <response code="404">Team not found</response>  
+    /// <response code="500">If an unexpected error occurred</response> 
+    [HttpPost]
+    [Consumes("application/json")]
+    [Produces("application/json")]
+    [ProducesResponseType<Team>(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public IActionResult Post([FromBody] Team team)
+    {
 
-            var teamFromDb = _dbContext.Team.Find(team.id);
-            if (teamFromDb == null)
-            {
-                return NotFound("Team not found");
+            var teamFromDb =  _dbContext.Team.Find(team.id);
+            if (teamFromDb == null) {
+                return BadRequest("A Team with this id already exists");
             }
 
             try
             {
-                _dbContext.Add(team);
+                var entity = _dbContext.Add(team);
                 _dbContext.SaveChanges();
-                return Ok(team);
+                return Ok(entity.Entity);
             }
             catch (DbUpdateException e)
             {
@@ -91,22 +90,22 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
                 return BadRequest(e.Message);
             }
             catch (Exception e)
-            {
-                _logger.LogError(e, "Error occured while adding new team!");
-                return StatusCode(500, "Internal Server Error");
-            }
-
-
+        {
+            _logger.LogError(e, "Error occured while adding new team!");
+            return StatusCode(500, "Internal Server Error");
         }
 
-        /// <summary>
-        /// Update a specific team.
-        /// </summary>
-        /// <param name="team">The Team object</param>
-        /// <returns>The inserted team</returns>
-        /// <response code="400">If the team object is not valid</response> 
-        /// <response code="500">If an unexpected error occurred</response> 
-        [Consumes("application/json")]
+
+    }
+
+    /// <summary>
+    /// Update a specific team.
+    /// </summary>
+    /// <param name="team">The Team object</param>
+    /// <returns>The inserted team</returns>
+    /// <response code="400">If the team object is not valid</response> 
+    /// <response code="500">If an unexpected error occurred</response> 
+    [Consumes("application/json")]
     [Produces("application/json")]
     [ProducesResponseType<Team>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -115,16 +114,20 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     [HttpPut]
     public IActionResult Put([FromBody] Team team)
     {
-        var teamFromDb = _dbContext.Team.Find(team.id);
+        var teamFromDb = _dbContext.Team.AsNoTracking()
+                  .Where(t => t.id.Equals(team.id))
+                  .FirstOrDefault();
+        
         if (teamFromDb == null) {
             return NotFound("Team not found");
         }
+
         
          try
         {
-            _dbContext.Update(team);
+            var entity = _dbContext.Update(team);
             _dbContext.SaveChanges();
-            return Ok(team);
+            return Ok(entity.Entity);
         }
         catch (Exception e)
         {
@@ -144,7 +147,11 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     public IActionResult Delete(int id)
     {
         _logger.LogInformation("Deleting team with id {}", id);
-        var teamFromDb =  _dbContext.Team.Find(id);
+
+        var teamFromDb = _dbContext.Team.AsNoTracking()
+                  .Where(t => t.id.Equals(id))
+                  .FirstOrDefault();
+
         if (teamFromDb == null) {
             return NotFound("Team not found");
         }

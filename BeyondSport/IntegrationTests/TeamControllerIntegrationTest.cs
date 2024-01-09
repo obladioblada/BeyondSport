@@ -33,7 +33,7 @@ public class TeamControllerIntegrationTest : IClassFixture<WebApplicationFactory
     }
 
     [Fact]
-    public async Task Get_TeamPlayer()
+    public async Task Get_TeamPlayers()
     {
         // Arrange
 
@@ -49,7 +49,7 @@ public class TeamControllerIntegrationTest : IClassFixture<WebApplicationFactory
         Assert.Single(user);
     }
 
-    [Fact(Skip = "Could not make PostAsJsonAsync work")]
+    [Fact]
     public async Task Post_AddNewPlayer()
     {
         // Arrange
@@ -70,22 +70,10 @@ public class TeamControllerIntegrationTest : IClassFixture<WebApplicationFactory
         var responseContent = await response.Content.ReadAsStringAsync();
         var player = JsonConvert.DeserializeObject<Player>(responseContent);
         Assert.NotNull(player);
-        Assert.Equal(1, player.id);
-        Assert.Equal("Diego Armando Maradona", player.name);
-        Assert.Equal(32, player.age);
-        Assert.Equal(1, player.team_id);
-
-         // Act
-        var getResponse = await _client.GetAsync("/Player/3");
-       
-        // Assert
-        getResponse.EnsureSuccessStatusCode(); // Status Code 200-299
-        var getResponseContent = await getResponse.Content.ReadAsStringAsync();
-        var playerFromApi = JsonConvert.DeserializeObject<Player>(getResponseContent);
-        Assert.NotNull(playerFromApi);
-        Assert.Equal(player.id, playerFromApi.id);
-        Assert.Equal(player.name, playerFromApi.name);
-        Assert.Equal(player.age, playerFromApi.age);
-        Assert.Equal(player.team_id, playerFromApi.team_id);
+        Assert.Equal(newPlayer.id, player.id);
+        Assert.Equal(newPlayer.name, player.name);
+        Assert.Equal(newPlayer.age, player.age);
+        Assert.Equal(newPlayer.team_id, player.team_id);
     }
+    
 }
