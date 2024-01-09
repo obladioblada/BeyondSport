@@ -52,7 +52,7 @@
    curl -X 'GET' \'http://localhost:8080/Player/1' \ -H 'accept: application/json'
    ```
 
-## Running the Project Locally
+## Running locally with .NET 8
 
 1. **Clone the Repository:**
 
