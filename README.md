@@ -4,8 +4,8 @@
    The project includes [Swagger](https://swagger.io/) documentation and can be run using Docker Compose, with the  ```compose.yaml``` file located under the root directory.
 
    For the test sake I decided to use InMemoryDB in case docker is not installed on the host machine. Jump to the "Running the Project Locally" section in that case.  
-If the application is running with docker, a MySql database container is fired up along with the app.  
-Both ways, the application is pre-populated with some data.
+   If the application is running with docker, a MySql database container is fired up along with the app.  
+   Both ways, the application is pre-populated with some data.
 
 ## Prerequisites
 
@@ -78,7 +78,7 @@ Both ways, the application is pre-populated with some data.
 
 4. **Testing**
 
-   I set up a couple of tests for demonstration and they are not exaustive. (I left also one that will be skipped because I could not make it work and I thought to ask you guys in case).
+   I set up a couple of tests for demonstration and they are not exaustive.  
    You can run the tests with 
 
    ```bash
