@@ -22,9 +22,11 @@ services:
       - beyond-sports-network
     ports:
       - "3306:3306"
-    volumes:
-      - mysqldb:/var/lib/mysql
-      - ./sql/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    expose:
+      - '3306'
+    volumes: 
+      - "./data:/var/lib/mysql"
+      - "./sql/setup.sql:/docker-entrypoint-initdb.d/setup.sql"
     restart: always
     environment: 
       MYSQL_ROOT_PASSWORD: Root0++
@@ -35,6 +37,3 @@ services:
 networks:
   beyond-sports-network:
     driver: bridge
-
-volumes:
-  mysqldb:

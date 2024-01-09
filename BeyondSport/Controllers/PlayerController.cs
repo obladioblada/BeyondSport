@@ -37,7 +37,7 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
     /// </summary>
     /// <param name="player">The player object</param>
     /// <returns>The inserted player</returns>
-    /// <response code="400">If the player object is not valid</response> 
+    /// <response code="400">Player object is not valid or Player already exists</response> 
     /// <response code="500">If an unexpected error occurred</response>   
     [HttpPost]
     [Consumes("application/json")]
@@ -109,12 +109,13 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
     /// </summary>
     /// <param name="id">The Player id</param>
     /// <returns>The deleted player</returns>
-    /// <response code="404">Player not found</response>      
+    /// <response code="404">Player not found</response>
+    /// <response code="500">Player cannot be deleted</response>      
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult Delete(int id)
     {
-        _logger.LogInformation("Deleting team with id {}", id);
+        _logger.LogInformation("Deleting player with id {}", id);
         var playerFromDb = _dbContext.Player.AsNoTracking()
                   .Where(p => p.id.Equals(id))
                   .FirstOrDefault();
@@ -122,9 +123,17 @@ public class PlayerController(ILogger<PlayerController> logger, ApplicationConte
         if (playerFromDb == null) {
             return NotFound("Player not found");
         }
-        _dbContext.Player.Remove(playerFromDb);
-        _dbContext.SaveChanges();
-        return Ok();
+
+        try {
+            _dbContext.Player.Remove(playerFromDb);
+            _dbContext.SaveChanges();
+            return Ok();
+        } 
+        catch(Exception e) {
+             _logger.LogError(e, "Error occured while deleting the Player: {}", id);
+            return StatusCode(500, "Player cannot be deleted");
+        }
+        
     }
 }
 

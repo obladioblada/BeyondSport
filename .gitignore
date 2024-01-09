@@ -26,6 +26,9 @@ nupkg/
 *.userosscache
 *.sln.docstates
 
+
+data/
+
 # Build results
 .BeyondSport/bin/
 .BeyondSport/obj/

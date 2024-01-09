@@ -60,7 +60,7 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     /// </summary>
     /// <param name="team">The Team object</param>
     /// <returns>The inserted team</returns>
-    /// <response code="400">If the team object is not valid</response> 
+    /// <response code="400">Team object is not valid or Team already exists</response> 
     /// <response code="404">Team not found</response>  
     /// <response code="500">If an unexpected error occurred</response> 
     [HttpPost]
@@ -103,7 +103,7 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     /// </summary>
     /// <param name="team">The Team object</param>
     /// <returns>The inserted team</returns>
-    /// <response code="400">If the team object is not valid</response> 
+    /// <response code="400">Team object is not valid</response> 
     /// <response code="500">If an unexpected error occurred</response> 
     [Consumes("application/json")]
     [Produces("application/json")]
@@ -131,7 +131,7 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "Error occured while saving player!");
+            _logger.LogError(e, "Error occured while saving Team!");
             return StatusCode(500, "Internal Server Error");
         }
     }
@@ -142,6 +142,8 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
     /// <param name="id">The Team id</param>
     /// <returns>The deleted team</returns>
     /// <response code="404">Team not found</response>    
+    /// <response code="500">Team cannot be deleted</response>    
+
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public IActionResult Delete(int id)
@@ -156,13 +158,15 @@ public class TeamController(ILogger<TeamController> logger, ApplicationContext c
             return NotFound("Team not found");
         }
 
-        _dbContext.Team.Remove(teamFromDb);
-        _dbContext.SaveChanges();
-        return Ok(teamFromDb);
-
+        try {
+            _dbContext.Team.Remove(teamFromDb);
+            _dbContext.SaveChanges();
+            return Ok(teamFromDb);
+        } catch(Exception e) {
+             _logger.LogError(e, "Error occured while deleting the Team: {}", id);
+            return StatusCode(500, "Team cannot be deleted");
+        }
     }
 }
 
 }
-
-

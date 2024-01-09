@@ -9,7 +9,7 @@ CREATE TABLE Player (
     name VARCHAR(30) NOT NULL, 
     age INT NOT NULL, 
     team_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY (team_id) REFERENCES Teams(id)
+    FOREIGN KEY (team_id) REFERENCES Team(id)
  );
 
 INSERT INTO Team  (id, name, country) VALUES (1, 'Rome', 'Italy');
